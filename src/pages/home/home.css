@@ -1,0 +1,13 @@
+.home {
+  background: var(--primary-dark);
+  display: flex;
+  padding: 80pt 5%;
+  overflow: auto;
+}
+
+.posts-wrapper {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}

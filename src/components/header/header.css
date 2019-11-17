@@ -1,0 +1,22 @@
+.header {
+    background-color: #161A26E6;
+    margin: 0pt;
+    position: fixed;
+    width: 100vw;
+    height: 50pt;
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    padding-left: 5%;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.app-name {
+    font-size: 2.1rem;
+    line-height: 2.1rem;
+    color: #E6AF2E;
+    font-family: 'Satisfy', cursive;
+}

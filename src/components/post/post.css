@@ -29,6 +29,8 @@
 .post-subreddit {
   flex: 1;
   text-align: right;
+  color: unset;
+  text-decoration: none;
 }
 
 .post-content {
@@ -75,6 +77,11 @@
   text-align: justify;
 }
 
+.post-title-only {
+  font-size: 20pt;
+  color: var(--secondary-extra-light);
+}
+
 .post-footer {
   display: flex;
 }
@@ -86,4 +93,16 @@
 .post-share {
   flex: 1;
   text-align: right;
+  color: unset;
+  text-decoration: none;
+}
+
+.vote-img {
+  margin-right: 4pt;
+  height: 9pt;
+}
+
+.share-img {
+  margin-right: 4pt;
+  height: 9pt;
 }

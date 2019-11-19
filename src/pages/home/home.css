@@ -11,3 +11,35 @@
   flex-flow: column nowrap;
   align-items: center;
 }
+
+.home-loading {
+  background: #212738;
+  width: 80%;
+  padding: 8pt;
+  border-radius: 5pt;
+  border: #F8EBCB10 solid 1pt;
+  margin-bottom: 20pt;
+  height: 50pt;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  
+  animation: pulse 2s infinite;
+}
+
+.infinite-scroll-component__outerdiv {
+  width: 100%;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

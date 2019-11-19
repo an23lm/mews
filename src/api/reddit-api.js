@@ -5,9 +5,9 @@ class _RedditApi {
         this.baseUrl = 'http://www.reddit.com';
     }
 
-    async getFrontPage() {
+    async getFrontPage(lastName) {
         return new Promise((resolve, reject) => {
-            let url = this.baseUrl + "/r/all.json?raw_json=1";
+            let url = this.baseUrl + `/r/all.json?raw_json=1&after=${lastName}`;
             fetch(url, {
                 mode: "cors",
                 method: "GET",

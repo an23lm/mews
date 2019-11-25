@@ -41,11 +41,6 @@ class CommentGroup extends React.Component {
         }
     }
 
-    commentOnClick(comment) {
-        let commentThread = comment.replies.data.children
-        this.setState({ selectedCommentThread: commentThread })
-    }
-
     render() {
         if (!this.nonExtensionComments) return null
         return (
@@ -56,7 +51,6 @@ class CommentGroup extends React.Component {
                             <Comment
                                 key={comment.data.id}
                                 data={comment}
-                                onClick={this.commentOnClick.bind(this)}
                             />
                         )
                     }

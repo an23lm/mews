@@ -41,6 +41,7 @@
   display: flex;
   justify-content: center;
   flex: 1;
+  max-height: 80vh;
 
   position: relative;
   overflow: hidden;
@@ -54,9 +55,9 @@
 .post-content-image {
   width: 100%;
   max-width: 700pt;
-  max-height: 80vh;
   object-fit: contain;
   margin-bottom: -2pt;
+  max-height: 80vh;
 }
 
 .post-content-video-wrapper {
@@ -67,9 +68,9 @@
 .post-content-video {
   width: 100%;
   max-width: 700pt;
-  max-height: 80vh;
   object-fit: contain;
   margin-bottom: -2pt;
+  max-height: 80vh;
 }
 
 .post-content-link {
@@ -111,4 +112,23 @@
 .share-img {
   margin-right: 4pt;
   height: 9pt;
+}
+
+.post-content-wapper {
+  flex: 1 0 50%;
+}
+
+.comments {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+  padding-left: 8pt;
+}
+
+.comments > div {
+  flex-basis: 0px;
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

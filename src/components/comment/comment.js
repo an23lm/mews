@@ -5,7 +5,7 @@ import CommentGroup from '../comment-group/comment-group';
 class Comment extends React.Component {
     constructor(props) {
         super(props)
-    
+        this.state = { showReplies: true }
         this.comment = props.data.data
         this.replyThread = 
             this.comment.hasOwnProperty("replies")
@@ -19,13 +19,17 @@ class Comment extends React.Component {
         return this.comment
     }
 
+    toggleShowReplies() {
+        this.setState({ showReplies: !this.state.showReplies })
+    }
+
     render() {
         return (
             <div className="mews-comment-container">
-                <div className="mews-comment" onClick={() => { this.props.onClick(this.comment) }}>
+                <div className="mews-comment" onClick={this.toggleShowReplies.bind(this)}>
                     {this.comment.body}
                 </div>
-                <CommentGroup comments={this.replyThread} />
+                {this.state.showReplies ?  <CommentGroup comments={this.replyThread} /> : null}
             </div>
         )
     }

@@ -1,18 +1,6 @@
 .mews-comment {
-    /* border-top: 1pt #F8EBCB30 solid; */
-    padding: 4pt;
-}
-
-.comments {
-    position: absolute;
-    right: 0pt;
-    top: 8pt;
-    bottom: 8pt;
-    width: 50%;
-    background: #161A26E6;
+    padding: 4pt 8pt;
+    margin-bottom: 4pt;
+    background: var(--primary-dark);
     border-radius: 5pt;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(5px);
-    overflow-y: scroll;
-    overflow-x: hidden;
 }

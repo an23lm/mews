@@ -8,7 +8,8 @@ class Post extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = { comments: [] }
+        this.state = { comments: [], width: 0 }
+        this.onResize = this.onResize.bind(this);
 
         this.content = this.getPostContent(props.data)
         this.subredditUrl = "https://www.reddit.com" + this.props.subreddit_name_prefixed
@@ -17,11 +18,23 @@ class Post extends React.Component {
         this.vidRef = React.createRef()
     }
 
+    componentWillMount() {
+        this.setState({
+            width: this.getWindowWidth()
+        });
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.onResize);
+    }
+
     componentDidMount() {
+        window.addEventListener("resize", this.onResize);
+
         RedditApi
             .getCommentsOnPost(this.props.data.permalink)
             .then(res => {
-                let coms = res[1].data.children.slice(0, 1)
+                let coms = res[1].data.children
                 this.setState({ comments: coms })
             })
     }
@@ -175,7 +188,9 @@ class Post extends React.Component {
                     <a className="post-subreddit" href={this.subredditUrl}>{this.props.data.subreddit_name_prefixed}</a>
                 </div>
                 <div className="post-content">
-                    {this.renderContent(this.content)}
+                    <div className="post-content-wapper">
+                        {this.renderContent(this.content)}
+                    </div>
                     <div className="comments">
                         <CommentGroup comments={this.state.comments} />
                     </div>
@@ -193,6 +208,21 @@ class Post extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    getWindowWidth() {
+        return Math.max(
+          document.documentElement.clientWidth,
+          window.innerWidth || 0
+        );
+    }
+
+    onResize() {
+        window.requestAnimationFrame(() => {
+          this.setState({
+            width: this.getWindowWidth()
+          });
+        });
     }
 }
 

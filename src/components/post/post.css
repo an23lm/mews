@@ -9,6 +9,9 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: stretch;
+
+  position: relative;
+  overflow: hidden;
 }
 
 .post-header {
@@ -38,6 +41,9 @@
   display: flex;
   justify-content: center;
   flex: 1;
+
+  position: relative;
+  overflow: hidden;
 }
 
 .post-content-image-wrapper {

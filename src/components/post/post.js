@@ -1,10 +1,14 @@
 import React from 'react';
 import './post.css';
 import LazyLoad from 'react-lazy-load';
+import CommentGroup from '../comment-group/comment-group';
+import RedditApi from '../../api/reddit-api';
 
 class Post extends React.Component {
     constructor(props) {
         super(props)
+
+        this.state = { comments: [] }
 
         this.content = this.getPostContent(props.data)
         this.subredditUrl = "https://www.reddit.com" + this.props.subreddit_name_prefixed
@@ -12,20 +16,32 @@ class Post extends React.Component {
         this.isVideo = false
         this.vidRef = React.createRef()
     }
+
+    componentDidMount() {
+        RedditApi
+            .getCommentsOnPost(this.props.data.permalink)
+            .then(res => {
+                let coms = res[1].data.children.slice(0, 1)
+                this.setState({ comments: coms })
+            })
+    }
     
     getPostContent(data) {
+        let content = undefined
         if (!data.hasOwnProperty('post_hint')) {
-            let content = {type: 'title', content: data.title}
-            data.title = ''
+            if (data.selftext !== undefined) {
+                content = { type: 'self', content: data.selftext }
+            } else {
+                content = {type: 'title', content: data.title}
+                data.title = ''
+            }
             return content
         }
 
         let type = data.post_hint
-        let content = undefined
     
         if (type === "image") {
             content = data.preview.images[0].source
-            console.log(content)
         } else if (type === "rich:video") {
             if (data.preview.images[0].hasOwnProperty('variants') 
             && data.preview.images[0].variants.hasOwnProperty('gif')) {
@@ -33,7 +49,7 @@ class Post extends React.Component {
                 content.isGif = true
             } else {
                 let embed = data.secure_media.oembed
-                let content = {}
+                content = {}
                 content.url = embed.thumbnail_url
                 content.height = embed.height
                 content.width = embed.width
@@ -160,6 +176,9 @@ class Post extends React.Component {
                 </div>
                 <div className="post-content">
                     {this.renderContent(this.content)}
+                    <div className="comments">
+                        <CommentGroup comments={this.state.comments} />
+                    </div>
                 </div>
                 <div className="post-footer">
                     <div className="post-votes">
@@ -167,7 +186,7 @@ class Post extends React.Component {
                         {this.props.data.score}
                     </div>
                     <div className="post-comments"></div>
-                    <a className="post-share" href={this.redditUrl}>
+                    <a className="post-share" href={this.redditUrl} rel="noopener noreferrer" target="_blank">
                         <img className="share-img" src={require('../../assets/share.svg')}  alt=''/>
                         Open on Reddit
                     </a>

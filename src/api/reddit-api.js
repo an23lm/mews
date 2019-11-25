@@ -7,35 +7,51 @@ class _RedditApi {
 
     async getFrontPage(lastName) {
         return new Promise((resolve, reject) => {
-            let url = this.baseUrl + `/r/all.json?raw_json=1&after=${lastName}`;
+            let url = this.baseUrl + `/r/all/.json?raw_json=1&after=${lastName}`
             fetch(url, {
-                mode: "cors",
-                method: "GET",
+                mode: 'cors',
+                method: 'GET',
                 headers: {
-                    "Accept": "application/json",
+                    'Accept': 'application/json',
                 }
             })
             .then(response => {
                 if (response.ok)
-                    return response.json();
+                    return response.json()
 
-                reject({ kind: 'Request Error', status: response.status, statusText: response.statusText });
+                reject({ kind: 'Request Error', status: response.status, statusText: response.statusText })
             }).then(json => {
-                resolve(json);
+                resolve(json)
             }).catch(err => {
-                reject({ kind: 'Error', error: err });
-            });
-        });
+                reject({ kind: 'Error', error: err })
+            })
+        })
     }
 
-    // async getFrontPage() {
-    //     let url = this.baseUrl + "/r/all.json?raw_json=1";
-    //     console.log(url);
-    //     const response = await axios.get(url);
-    //     console.log(response)
-    // }
+    async getCommentsOnPost(permalink) {
+        return new Promise((resolve, reject) => {
+            let url = this.baseUrl + permalink + '.json?raw_json=1';
+            fetch(url, {
+                mode: 'cors',
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                }
+            })
+            .then(response => {
+                if (response.ok)
+                    return response.json()
+
+                reject({ kind: 'Request Error', status: response.status, statusText: response.statusText })
+            }).then(json => {
+                resolve(json)
+            }).catch(err => {
+                reject({ kind: 'Error', error: err })
+            })
+        })
+    }
 }
 
-const RedditApi = new _RedditApi();
+const RedditApi = new _RedditApi()
 
-export default RedditApi;
+export default RedditApi

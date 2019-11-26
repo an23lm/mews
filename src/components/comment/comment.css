@@ -3,4 +3,27 @@
     margin-bottom: 4pt;
     background: var(--primary-dark);
     border-radius: 5pt;
+    cursor: pointer;
+}
+
+.mews-comment-header {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.mews-comment-author {
+    flex: 1;
+    color: var(--secondary-light);
+    font-weight: 600;
+}
+
+.mews-comment-body {
+    margin-top: 4pt;
+    margin-bottom: 4pt;
+    color: var(--secondary-extra-light);
+}
+
+.mews-comment-hidden {
+    font-size: 9pt;
+    color: var(--primary-light);
 }

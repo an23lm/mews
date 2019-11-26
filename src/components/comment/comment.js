@@ -23,11 +23,29 @@ class Comment extends React.Component {
         this.setState({ showReplies: !this.state.showReplies })
     }
 
+    showComment() {
+        return (
+            <div className="mews-comment-body">{this.comment.body}</div>
+        );
+    }
+
+    showHidden() {
+        return (
+            <div className="mews-comment-hidden">Show Comments</div>
+        )
+    }
+
     render() {
         return (
             <div className="mews-comment-container">
                 <div className="mews-comment" onClick={this.toggleShowReplies.bind(this)}>
-                    {this.comment.body}
+                    <div className="mews-comment-header">
+                        <div className="mews-comment-author">
+                            {this.comment.author}
+                        </div>
+                        {this.state.showReplies ? null : this.showHidden()}
+                    </div>
+                    {this.state.showReplies ? this.showComment() : null}
                 </div>
                 {this.state.showReplies ?  <CommentGroup comments={this.replyThread} /> : null}
             </div>

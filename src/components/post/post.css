@@ -1,6 +1,6 @@
 .post {
   background: #212738;
-  width: 80%;
+  width: 95%;
   padding: 8pt;
   border-radius: 5pt;
   border: #F8EBCB10 solid 1pt;
@@ -27,6 +27,7 @@
   font-weight: 500;
   text-align: center;
   padding: 0pt 8pt;
+  font-weight: 600;
 }
 
 .post-subreddit {
@@ -34,6 +35,16 @@
   text-align: right;
   color: unset;
   text-decoration: none;
+  display: flex;
+  flex-flow: row nowrap;
+  font-weight: 600;
+  /* align-items: center; */
+}
+
+.post-subreddit-header {
+  flex: 1;
+  color: var(--primary-light);
+  font-weight: 400;
 }
 
 .post-content {
@@ -74,7 +85,6 @@
 }
 
 .post-content-link {
-  border: #F8EBCB90 solid 1px;
   border-radius: 5pt;
   overflow: hidden;
 }

@@ -18,17 +18,15 @@ class Post extends React.Component {
         this.vidRef = React.createRef()
     }
 
-    componentWillMount() {
-        this.setState({
-            width: this.getWindowWidth()
-        });
-    }
-
     componentWillUnmount() {
         window.removeEventListener("resize", this.onResize);
     }
 
     componentDidMount() {
+        this.setState({
+            width: this.getWindowWidth()
+        });
+
         window.addEventListener("resize", this.onResize);
 
         RedditApi
@@ -177,6 +175,14 @@ class Post extends React.Component {
         }
     }
 
+    showComments() {
+        return (
+            <div className="comments">
+                <CommentGroup comments={this.state.comments} />
+            </div>
+        )
+    }
+
     render() {
         if (this.props.data.over_18) return null;
 
@@ -185,15 +191,13 @@ class Post extends React.Component {
                 <div className="post-header">
                     <div className="post-left-filler"></div>
                     <div className="post-title">{this.props.data.title}</div>
-                    <a className="post-subreddit" href={this.subredditUrl}>{this.props.data.subreddit_name_prefixed}</a>
+                    <a className="post-subreddit" href={this.subredditUrl}><div className="post-subreddit-header">r/</div>{this.props.data.subreddit}</a>
                 </div>
                 <div className="post-content">
                     <div className="post-content-wapper">
                         {this.renderContent(this.content)}
                     </div>
-                    <div className="comments">
-                        <CommentGroup comments={this.state.comments} />
-                    </div>
+                    {this.state.width >= 1600 ? this.showComments() : null}
                 </div>
                 <div className="post-footer">
                     <div className="post-votes">
@@ -219,6 +223,7 @@ class Post extends React.Component {
 
     onResize() {
         window.requestAnimationFrame(() => {
+            console.log(this.getWindowWidth())
           this.setState({
             width: this.getWindowWidth()
           });
